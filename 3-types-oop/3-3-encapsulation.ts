@@ -51,4 +51,49 @@
   /*  maker.coffeeBeans = 3; // 외부에서 설정 가능
   maker.coffeeBeans = -43; // 유효하지 않은 상태로 만들 위험 존재 */
   maker.fillCoffeeBeans(32);
+
+  /* Getter and Setter */
+  /* class User {
+    firstName: string;
+    lastName: string;
+    fullName: string;
+
+    constructor(firstName: string, lastName: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.fullName = `${firstName} ${lastName}`;
+    }
+  }
+
+  const user = new User("Lee", "Jisoo");
+  console.log(user);
+  user.firstName = "Kelly";
+  console.log(user); // 여전히 Lee Jisoo로 나옴 => 이럴 때 getter setter가 유용! */
+
+  class User {
+    get fullName(): string {
+      return `${this.firstName} ${this.lastName}`;
+    }
+
+    private internalAge = 4;
+    get age(): number {
+      return this.internalAge;
+    }
+
+    set age(num: number) {
+      if (num < 0) {
+        throw new Error("It's invalid number.");
+      }
+      this.internalAge = num;
+    }
+
+    constructor(private firstName: string, private lastName: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+  }
+
+  const user = new User("Lee", "Jisoo");
+  user.age = 6;
+  console.log(user.age);
 }
