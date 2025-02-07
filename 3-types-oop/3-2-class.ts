@@ -26,7 +26,7 @@
         // class 안의 멤버변수 접근 시 this 붙이기
         throw new Error("Not enough coffee beans!");
       }
-      this.coffeeBeans == shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT; // 사용한 만큼 감소
+      this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT; // 사용한 만큼 감소
       return {
         shots, // shots: shots, key와 value 이름 동일 시 생략 가능
         hasMilk: false,
