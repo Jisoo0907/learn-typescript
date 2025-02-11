@@ -1,7 +1,8 @@
 {
   type CoffeeCup = {
     shots: number;
-    hasMilk: boolean;
+    hasMilk?: boolean;
+    hasSugar?: boolean;
   };
 
   interface CoffeeMaker {
@@ -77,6 +78,30 @@
       return { ...coffee, hasMilk: true };
     }
   }
+
+  class SweetCoffeMaker extends CoffeeMachine {
+    makeCoffee(shots: number): CoffeeCup {
+      const coffee = super.makeCoffee(shots);
+      return {
+        ...coffee,
+        hasSugar: true,
+      };
+    }
+  }
+
+  const machines = [
+    new CoffeeMachine(16),
+    new CaffeLatteMachine(16, "1"),
+    new SweetCoffeMaker(16),
+    new CoffeeMachine(16),
+    new CaffeLatteMachine(16, "1"),
+    new SweetCoffeMaker(16),
+  ];
+  machines.forEach((machine) => {
+    console.log("------------------------");
+    machine.makeCoffee(1);
+    // 동일한 부모 클래스 상속 시 공통된 api 호출 가능
+  });
 
   const machine = new CoffeeMachine(23);
   const latteMachine = new CaffeLatteMachine(23, "SSSS");
