@@ -139,11 +139,11 @@
 
   const machines = [
     new CoffeeMachine(16),
-    new CaffeLatteMachine(16, "1"),
-    new SweetCoffeeMaker(16),
+    new CaffeLatteMachine(16, "1", new CheapMilkSteamer()),
+    new SweetCoffeeMaker(16, new AutomaticSugarMixer()),
     new CoffeeMachine(16),
-    new CaffeLatteMachine(16, "1"),
-    new SweetCoffeeMaker(16),
+    new CaffeLatteMachine(16, "1", new CheapMilkSteamer()),
+    new SweetCoffeeMaker(16, new AutomaticSugarMixer()),
   ];
   machines.forEach((machine) => {
     console.log("------------------------");
@@ -152,7 +152,11 @@
   });
 
   const machine = new CoffeeMachine(23);
-  const latteMachine = new CaffeLatteMachine(23, "SSSS");
+  const latteMachine = new CaffeLatteMachine(
+    23,
+    "SSSS",
+    new CheapMilkSteamer()
+  );
   const coffee = latteMachine.makeCoffee(1);
   console.log(coffee);
   console.log(latteMachine.serialNumber);
