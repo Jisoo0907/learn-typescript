@@ -11,6 +11,7 @@
     // 어떤 객체에서도 같은 값을 가짐.
     //  => 메모리 낭비
     // static을 붙여주면 object가 아닌 class와 연결되므로 object마다 생성되지 않음.
+    // 인스턴스를 생성하지 않고도 클래스 이름으로 직접 접근 가능해짐. CoffeeMaker.BEANS_GRAMM_PER_SHOT
     coffeeBeans: number = 0; // instance(object) level
 
     constructor(coffeeBeans: number) {
