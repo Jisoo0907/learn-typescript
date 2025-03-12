@@ -1,22 +1,24 @@
 /* 
 Linked List 방식으로 스택 구현
 -> 배열 사용 X, Node들을 연결해서 스택 만듦.
+
+<Generic 타입으로 Stack 변경하기>
 */
-{
-interface Stack {
+
+interface Stack<T> {
   readonly size: number; // 스택의 크기를 외부에서 읽을 수 있지만 변경 X
-  push(value: string): void; // 문자열 데이터를 스택에 추가하는 함수
-  pop(): string; // 스택에서 데이터를 제거하고 반환하는 함수
+  push(value: T): void; // 문자열 데이터를 스택에 추가하는 함수
+  pop(): T; // 스택에서 데이터를 제거하고 반환하는 함수
 }
 
-type StackNode = {
-  readonly value: string;
-  readonly next?: StackNode;
+type StackNode<T> = {
+  readonly value: T;
+  readonly next?: StackNode<T>;
 };
 
-class StackImpl implements Stack {
+class StackImpl<T> implements Stack<T> {
   private _size: number = 0;
-  private head?: StackNode;
+  private head?: StackNode<T>;
 
   constructor(private capacity: number) {}
   // 인스턴스 생성 시 capacity 값이 자동으로 설정됨.
@@ -27,16 +29,16 @@ class StackImpl implements Stack {
     return this._size;
   }
 
-  push(value: string) {
+  push(value: T) {
     if (this.size === this.capacity) {
       throw new Error("Stack is full!"); // 스택이 꽉 찼다면 에러 발생
     }
-    const node: StackNode = { value, next: this.head }; // 새 노드 생성 (현재 head를 next로 연결)
+    const node = { value, next: this.head }; // 새 노드 생성 (현재 head를 next로 연결)
     this.head = node; // head를 새로운 노드로 변경
     this._size++; // 크기 증가
   }
 
-  pop(): string {
+  pop(): T {
     if (this.head == null) {
       throw new Error("Stack is empty!"); // 스택이 비어있다면 에러 발생
     }
@@ -54,4 +56,10 @@ stack.push("Joanna 3");
 while (stack.size !== 0) {
   console.log(stack.pop());
 }
+const stack2 = new StackImpl<number>(10);
+stack2.push(111);
+stack2.push(222);
+stack2.push(333);
+while (stack2.size !== 0) {
+  console.log(stack2.pop());
 }
